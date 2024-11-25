@@ -339,6 +339,14 @@ class IncludeTests(SimpleTestCase):
             .replace("\n", " ")
             .strip(),
         )
+        t = engine.get_template("recursive_relative_include.html")
+        self.assertEqual(
+            "Recursion!  A1  Recursion!  B1   B2   B3  Recursion!  C1",
+            t.render(Context({"comments": comments}))
+            .replace(" ", "")
+            .replace("\n", " ")
+            .strip(),
+        )
 
     def test_include_cache(self):
         """
